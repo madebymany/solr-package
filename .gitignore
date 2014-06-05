@@ -1,4 +1,5 @@
-jts*
-solr-4*
-KEYS
-.vagrant
+/jts-*.zip
+/jts-*/
+/solr-*
+/KEYS
+.vagrant/

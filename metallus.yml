@@ -5,7 +5,6 @@ jobs:
     builder: "make"
     base: "ubuntu:12.04"
     software_groups: *software
-    image: "solr/solr"
     packages:
       - type: debian
         name: solr-common

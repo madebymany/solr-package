@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+exec 2>&1
+
+source /etc/default/solr
+
+if [[ -f /etc/default/solr-zookeeper ]]
+then
+  source /etc/default/solr-zookeeper
+fi
+
+cd $SOLR_HOME
+
+java $DAEMON_OPTS $SOLR_CLOUD_OPTS $ZK_RUN -jar $EXECUTABLE

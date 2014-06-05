@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+source /etc/default/solr
+default_core_path="${SOLR_HOME}/../default-collection"
+
+if [[ ! -d $default_core_path ]]
+then
+  echo "Couldn't find the default core directory at '${default_core_path}'"
+  exit 0
+fi
+
+cp -r $default_core_path "${SOLR_HOME}/solr/${1}"
+echo "name=${1}" > "${SOLR_HOME}/solr/${1}/core.properties"

@@ -1,0 +1,2 @@
+ZK_RUN="-DzkRun"
+SOLR_CLOUD_OPTS="-DnumShards=1 -Dbootstrap_confdir=${SOLR_HOME}/solr/collection1/conf -Dcollection.configName=node_conf"

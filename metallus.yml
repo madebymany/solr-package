@@ -1,0 +1,16 @@
+software_groups: &software
+  - "base"
+jobs:
+  solr:
+    builder: "make"
+    base: "ubuntu:12.04"
+    software_groups: *software
+    packages:
+      - type: debian
+      name: solr-common
+        version: 4.0.1
+        depends:
+          - "openjdk-7-jre"
+        target: install
+        repos:
+          - mxm

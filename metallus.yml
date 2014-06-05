@@ -10,7 +10,9 @@ jobs:
       name: solr-common
         version: 4.0.1
         depends:
-          - "openjdk-7-jre"
+          - openjdk-7-jre-headless
+          - runit
+          - runit-logging
         target: install
         repos:
           - mxm

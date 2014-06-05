@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+[ -r /etc/default/solr ] && . /etc/default/solr
+
+restart_service() {
+  sv restart solr
+}
+
+case "$1" in
+  configure)
+    chown -R logger:logger /var/log/service/solr
+
+    if ! getent group "${SOLR_GROUP}" >/dev/null; then
+      echo "creating group '${SOLR_GROUP}'"
+      groupadd --system "${SOLR_GROUP}"
+    fi
+
+    if ! id "${SOLR_USER}" >/dev/null 2>&1
+    then
+      echo "creating user '$SOLR_USER'"
+      useradd --home "${SOLR_HOME}" --gid "${SOLR_GROUP}" --system \
+        --shell /usr/sbin/nologin ${SOLR_USER}
+    fi
+
+    ln -s /etc/sv/solr /etc/service/solr
+
+    if [ -n "$2" ] ; then
+      # This is an upgrade
+      restart_service
+    fi
+    ;;
+
+  triggered)
+    restart_service
+    ;;
+esac
+
+

@@ -1,3 +1,5 @@
+SOLR_USER=solr
+SOLR_GROUP=solr
 SOLR_HOME="/var/lib/solr/node"
 EXECUTABLE="${SOLR_HOME}/start.jar"
 DAEMON_OPTS="-Djava.net.preferIPv4Stack=true -Dsolr.solr.home=${SOLR_HOME}/solr"

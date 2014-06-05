@@ -59,6 +59,8 @@ install:
 	chown -R root:root /etc/sv/solr
 	mkdir -p /var/log/service
 	cp -R var/log/service/solr /var/log/service/
+	install --mode=0755 --owner=root --group=root -t /usr/sbin \
+		install-solr-collection
 
 install-default-collection:
 	mkdir -p "$(SOLR_HOME)"

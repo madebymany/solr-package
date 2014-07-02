@@ -7,7 +7,7 @@ jobs:
     software_groups: *software
     packages:
       - type: debian
-        name: solr-common
+        name: solr
         version: 4.8.1-2
         depends:
           - openjdk-7-jre-headless

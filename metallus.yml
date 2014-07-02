@@ -11,8 +11,7 @@ jobs:
         version: 4.8.1-2
         depends:
           - openjdk-7-jre-headless
-          - runit
-          - runit-logging
+          - runit-common
         target: install
         repos:
-          - mxm
+          - mxm-public

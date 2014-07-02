@@ -12,4 +12,4 @@ fi
 
 cd "$SOLR_HOME"
 
-java $DAEMON_OPTS $SOLR_CLOUD_OPTS $ZK_RUN -jar "$EXECUTABLE"
+exec chpst -u solr java $DAEMON_OPTS $SOLR_CLOUD_OPTS $ZK_RUN -jar "$EXECUTABLE"

@@ -3,7 +3,8 @@ SOLR_EXTRACT_DIR := solr-$(SOLR_VERSION)
 SOLR_TARBALL := $(SOLR_EXTRACT_DIR).tgz
 
 SOLR_HOME := /var/lib/solr
-SOLR_SOURCE_URL := http://mirror.vorboss.net/apache/lucene/solr/$(SOLR_VERSION)/$(SOLR_TARBALL)
+#SOLR_SOURCE_URL := http://mirror.vorboss.net/apache/lucene/solr/$(SOLR_VERSION)/$(SOLR_TARBALL)
+SOLR_SOURCE_URL := http://mirror.catn.com/pub/apache/lucene/solr/$(SOLR_VERSION)/$(SOLR_TARBALL)
 SOLR_CHECKSUM := $(SOLR_TARBALL).asc
 SOLR_CHECKSUM_URL := https://archive.apache.org/dist/lucene/solr/$(SOLR_VERSION)/$(SOLR_CHECKSUM)
 SOLR_KEYS := https://archive.apache.org/dist/lucene/solr/$(SOLR_VERSION)/KEYS
@@ -51,7 +52,7 @@ update-solr-war: | $(SOLR_EXTRACT_DIR) $(JTS_EXTRACT_DIR)
 
 install:
 	cp -R "$(SOLR_EXTRACT_DIR)" "$(SOLR_HOME)"
-	mv "$(SOLR_HOME)/example" "$(SOLR_HOME)/node"
+	cp -R "$(SOLR_HOME)/example" "$(SOLR_HOME)/node"
 	install --mode=0644 --owner=root --group=root \
 		etc/default/solr /etc/default/solr
 	mkdir -p /etc/sv
@@ -59,13 +60,6 @@ install:
 	chown -R root:root /etc/sv/solr
 	mkdir -p /var/log/service
 	cp -R var/log/service/solr /var/log/service/
-	install --mode=0755 --owner=root --group=root -t /usr/sbin \
-		install-solr-collection
-
-install-default-collection:
-	mkdir -p "$(SOLR_HOME)"
-	cp -R "$(SOLR_EXTRACT_DIR)/example/solr/collection1" "$(SOLR_HOME)/default-collection"
-	rm "$(SOLR_HOME)/default-collection/core.properties"
 
 clean:
 	rm -rf "$(SOLR_EXTRACT_DIR)" "$(SOLR_TARBALL)" "$(SOLR_CHECKSUM)" "$(JTS_ZIP)" "$(JTS_EXTRACT_DIR)"

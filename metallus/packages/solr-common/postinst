@@ -5,7 +5,10 @@ set -e
 [ -r /etc/default/solr ] && . /etc/default/solr
 
 restart_service() {
-  sv restart solr
+  if [ -d /etc/service/solr/supervise ]
+  then
+    sv restart solr
+  fi
 }
 
 case "$1" in
@@ -17,6 +20,7 @@ case "$1" in
       groupadd --system "${SOLR_GROUP}"
     fi
 
+
     if ! id "${SOLR_USER}" >/dev/null 2>&1
     then
       echo "creating user '$SOLR_USER'"
@@ -24,7 +28,12 @@ case "$1" in
         --shell /usr/sbin/nologin ${SOLR_USER}
     fi
 
-    ln -s /etc/sv/solr /etc/service/solr
+    chown -R solr:solr /var/lib/solr
+
+    if [ ! -d /etc/service/solr ]
+    then
+      ln -s /etc/sv/solr /etc/service
+    fi
 
     if [ -n "$2" ] ; then
       # This is an upgrade

@@ -6,22 +6,22 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "solr1" do |solr|
-    solr.vm.box = "precise64"
-    solr.vm.hostname = "solr1"
-    # solr.vm.network "forwarded_port", guest: 8983, host: 8900
+  config.vm.define "solr1" do |config|
+    config.vm.box = "precise64"
+    config.vm.hostname = "solr1"
+    config.vm.network "forwarded_port", guest: 8983, host: 8900
     # solr.vm.network "private_network", type: "dhcp"
-    solr.vm.provider "virtualbox" do |vb|
+    config.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
   end
 
-  config.vm.define "solr2" do |solr|
-    solr.vm.box = "precise64"
-    solr.vm.hostname = "solr2"
-    solr.vm.network "forwarded_port", guest: 8983, host: 8901
-    solr.vm.network "private_network", type: "dhcp"
-    solr.vm.provider "virtualbox" do |vb|
+  config.vm.define "solr2" do |config|
+    config.vm.box = "precise64"
+    config.vm.hostname = "solr2"
+    config.vm.network "forwarded_port", guest: 8983, host: 8901
+    config.vm.network "private_network", type: "dhcp"
+    config.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
   end

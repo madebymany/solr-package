@@ -7,7 +7,7 @@ jobs:
     software_groups: *software
     packages:
       - type: debian
-        name: solr
+        name: solr-common
         version: 4.8.1-2
         depends:
           - openjdk-7-jre-headless
@@ -15,3 +15,5 @@ jobs:
         target: install
         repos:
           - mxm-public
+        activates:
+          - solr-upgrade

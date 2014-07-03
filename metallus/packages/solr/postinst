@@ -2,6 +2,7 @@
 
 set -e
 
+[ -r /etc/default/solr ] && . /etc/default/solr
 
 case "$1" in
   configure)

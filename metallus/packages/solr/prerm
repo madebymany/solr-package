@@ -1,17 +1,9 @@
 #!/bin/sh
 set -e
 
-[ -r /etc/default/solr ] && . /etc/default/solr
-
 case "$1" in
-  upgrade)
-    if [ "$RESTART_ON_UPGRADE" = "true" ] ; then
-      sv restart solr
-    fi
-    ;;
   remove)
-    sv -v exit solr
-    rm /etc/service/solr
+    rm -rf /var/lib/solr
     ;;
 esac
 

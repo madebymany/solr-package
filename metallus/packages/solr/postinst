@@ -2,6 +2,7 @@
 
 set -e
 
+[ -r /etc/default/solr ] && . /etc/default/solr
 
 case "$1" in
   configure)
@@ -20,16 +21,6 @@ case "$1" in
     fi
 
     chown -R solr:solr /var/lib/solr
-
-
-    if [ -n "$2" ] ; then
-      # This is an upgrade
-      restart_service
-    fi
-    ;;
-
-  triggered)
-    restart_service
     ;;
 esac
 

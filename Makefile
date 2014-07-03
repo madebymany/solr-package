@@ -55,11 +55,6 @@ install:
 	cp -R "$(SOLR_HOME)/example" "$(SOLR_HOME)/node"
 	install --mode=0644 --owner=root --group=root \
 		etc/default/solr /etc/default/solr
-	mkdir -p /etc/sv
-	cp -R etc/sv/solr/ /etc/sv/
-	chown -R root:root /etc/sv/solr
-	mkdir -p /var/log/service
-	cp -R var/log/service/solr /var/log/service/
 
 clean:
 	rm -rf "$(SOLR_EXTRACT_DIR)" "$(SOLR_TARBALL)" "$(SOLR_CHECKSUM)" "$(JTS_ZIP)" "$(JTS_EXTRACT_DIR)"

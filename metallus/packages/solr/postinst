@@ -2,18 +2,9 @@
 
 set -e
 
-[ -r /etc/default/solr ] && . /etc/default/solr
-
-restart_service() {
-  if [ -d /etc/service/solr/supervise ]
-  then
-    sv restart solr
-  fi
-}
 
 case "$1" in
   configure)
-    chown -R logger:logger /var/log/service/solr
 
     if ! getent group "${SOLR_GROUP}" >/dev/null; then
       echo "creating group '${SOLR_GROUP}'"
@@ -30,10 +21,6 @@ case "$1" in
 
     chown -R solr:solr /var/lib/solr
 
-    if [ ! -d /etc/service/solr ]
-    then
-      ln -s /etc/sv/solr /etc/service
-    fi
 
     if [ -n "$2" ] ; then
       # This is an upgrade

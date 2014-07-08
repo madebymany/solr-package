@@ -8,7 +8,7 @@ jobs:
     packages:
       - type: debian
         name: solr-common
-        version: 4.8.1-7
+        version: 4.8.1-8
         depends:
           - openjdk-7-jre-headless
           - runit-common
